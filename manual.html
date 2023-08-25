@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Blog Post - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amita">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/-Fixed-Navbar-start-with-transparency-background-BS4-.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+    <div>
+        <header>
+            <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white transparency border-bottom border-light" id="transmenu">
+                <div class="container"><a class="navbar-brand text-primary" href="index.html"><i class="fas fa-cubes fa-2x"></i>&nbsp; 3D Rigging</a><button data-toggle="collapse" class="navbar-toggler collapsed" data-target="#navcol-1"><span></span><span></span><span></span></button>
+                    <div
+                        class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Posts</a></li>
+                            <li class="nav-item"><a class="nav-link" href="about.html">Acerca de mí</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contact.html">Contacto</a></li>
+                        </ul>
+                </div>
+    </div>
+    </nav>
+    </header>
+    </div>
+    <header class="masthead" style="background: url(&quot;assets/img/index/ManualIntro.png&quot;) center / cover no-repeat;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="post-heading">
+                        <h1>Manual de usuario</h1>
+                        <h2 class="subheading">Cómo usar el rig del fall guy</h2><span class="meta">Publicado por&nbsp;<a href="https://www.github.com/joseatrejos" target="_blank">José Trejo</a>&nbsp;el 16 de octubre<em>&nbsp;del</em>&nbsp;2020</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <p>Es necesario conocer el funcionamiento del rig para poder animarlo, por lo cual dedicaré este espacio para explicar cómo utilizarlo. Veamos cómo quedó el rig del personaje.</p><img src="assets/img/manual/HowToUse1.gif" style="width: 100%;">
+                    <p>Dejemos algo muy en claro, si por alguna razón desacomodan un controlador no tendrán qué hacer gran cosa para regresarlo a como estaba antes. El rig está hecho de forma en que al poner todos los valores del controlador en 0, éste regresará
+                        a su posición original.<br><br>Ahora si, ahondemos en cómo se segmentó el rig; los controladores se dividen en 4 colores para identificar qué parte del cuerpo se moverá. Los colores y partes son las siguientes:</p>
+                    <ul>
+                        <li style="color: #86FF46;">Verde para los switches del IK/FK de cada brazo y pierna.</li>
+                        <li style="color: #41A0FF;">Azul para los controladores IK de los brazos y piernas.</li>
+                        <li style="color: #FF71B4;">Rosa para los controladores FK de brazos y piernas.</li>
+                        <li>Negro para los controladores del centro del cuerpo.</li>
+                    </ul>
+                    <p>Los huesos de IK y FK también están pintados de color azul y rosa respectivamente. Por último, vale la pena mencionar que los "huesos base" o "neutrales" están pintados de color amarillo para ver que siguen a los huesos IK o FK dependiendo
+                        de cómo esté prendido el switch. Vaya, si el <span style="color: #86FF46;">switch verde</span>&nbsp;hace que aparezcan los IKs, será posible ver a los huesos amarillos siguiendo a los azules del IK, mientras que si el switch está
+                        puesto para que aparezcan los FKs, el esqueleto amarillo seguirá a los huesos rosas. Fácil, ¿no?</p><img src="assets/img/manual/HowToUse2.gif" style="width: 100%;">
+                    <p>Comencemos por comprender dónde están los controladores rosas. Están escondidos, por lo cual, como ya mencioné antes, para verlos será necesario seleccionar los switches verdes que están posicionados atrás del personaje y modificar
+                        el valor "IK FK Switch" a&nbsp;<span style="color: #FF71B4;">0 para animar los FKs</span>&nbsp;y a&nbsp;<span style="color: #41A0FF;">1 para los IK</span><br></p>
+                    <p>Sabiendo cómo funciona el primero de los cuatro colores, profundicemos en el resto de controladores uno por uno.</p>
+                    <h2 class="section-heading" style="color: #41A0FF;">IKs</h2>
+                    <p>Los IKs son los controladores más sencillos de explicar debido a que simplmente requieren que traslades y/o rotes un controlador. Dicho controlador será un círculo que estará posicionado en las muñecas del personaje o un cubo que verás
+                        alrededor del pie.</p><img src="assets/img/manual/HowToUse3.gif" style="width: 100%;">
+                    <p>Además del controlador del&nbsp; IK, se incluyó un controlador en forma de cubo con un constraint Pole Vector, por lo que será posible hacer que los codos y rodillas se apunten hacia donde decidas posicionar este cubito</p><img src="assets/img/manual/HowToUse4.gif"
+                        style="width: 100%;">
+                    <p>Se incluyó la funcionalidad de Stretch a los IKs, por lo que será posible mover los brazos y piernas más allá de lo que debería de ser posible; las extremidades se estirarán para dar un toque cartoony a las animaciones. Podemos verlo
+                        a continuación.<br></p>
+                    <p>Antes de pasar a los controladores FKs, he de agregar que aunque estos controladores sean IKs, se agregaron controladores de tipo FK a los dedos para poder cerrar la mano. Estos FKs tienen constraints de tipo orient, por lo que solo
+                        será posible rotarlos, pero servirán para cerrar el puño con los dedos. No los veremos aún ya que sería algo que se repetiría en el tema de los FKs, por lo que tendrán que seguir leyendo para saberlos utilizar.<br></p>
+                    <h2 class="section-heading"
+                        style="color: #FF71B4;">FKs</h2>
+                    <p>Ya vimos cómo se usan los IKs que, en mi opinión, facilitan mucho el movimiento de los brazos y piernas. Sin embargo, en caso de que seas un subnormal y prefieras (o necesites) rotar cada articulación a manita, el rig incluye esta
+                        funcionalidad en un agradable color rosa.</p><img class="img-fluid" src="assets/img/manual/Manual%20FKs.png"><span class="caption text-muted">Well, damn! Those are TOO MANY controllers</span>
+                    <p>Una vez hayan cambiado el switch a 0, se mostrarán los controladores FK del brazo o pierna que le corresponda. Como pueden ver, aparecerá un controlador para cada articulación. <br><br>En el caso del brazo, los controladores que podrán
+                        rotar los huesos son:<br></p>
+                    <ol>
+                        <li>Shoulder<br></li>
+                        <li>Elbow<br></li>
+                        <li>Wrist<br></li>
+                        <li>Articulacion a del dedo<br></li>
+                        <li>Articulacion b del dedo<br></li>
+                    </ol><img class="img-fluid" src="assets/img/manual/HowToUse6.gif">
+                    <p>Mientras que en el caso de la pierna los controladores que tienen orient constraints son:&nbsp;<br></p>
+                    <ol>
+                        <li>Leg</li>
+                        <li>Knee<br></li>
+                        <li>Ankle<br></li>
+                    </ol><img class="img-fluid" src="assets/img/manual/HowToUse7.gif">
+                    <p></p>
+                    <p>Como es visible en el gif, para mover cada articulación es necesario seleccionar el controlador FK que le corresponde. Sin embargo, para fines prácticos, es posible seleccionar varios controladores al mismo tiempo y rotarlos juntos,
+                        ¿para qué? Pues, al hacer una selección múltiple se obtiene un movimiento más fluido, similar a un látigo.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <p>Para ver cómo lograr este efecto explicaré un ejemplo práctico. Se necesita seleccionar un controlador (como la muñeca en este caso), junto con todos sus hijos que se pueden rotar (los dedos son hijos de la muñeca).<br></p>
+                    <p>Una vez seleccionados todos los controladores, sencillamente hay que pulsar la letra W para usar la herramienta de rotación y mover los huesos con el mouse.</p>
+                </div>
+                <div class="col-lg-6 d-lg-flex justify-content-lg-center align-items-lg-center"><img src="assets/img/manual/HowToUse8.gif" style="width: 100%;"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <p>Es posible aplicar este mismo principio para mover el brazo en su totalidad, así como las piernas a partir de la rodilla o a partir del controlador más alto. <br><br>Muy bien, ahora que entendimos cómo mover los FKs de manera<br>individual
+                        y de otra manera&nbsp;más natural, podemos pasar al uso de los controladores del cuerpo central.&nbsp;</p>
+                    <h2 class="section-heading">Controladores del centro del cuerpo</h2>
+                    <p>Vamos a hacer esto de manera breve y sencilla. Todos los controladores negros son orient constraints, por lo que únicamente se podrán rotar. ¿Qué parte rotará? Me parece que es un poco obvio considerando dónde se encuentra cada controlador
+                        pero ahí les va:</p>
+                    <p><strong>Cabeza</strong></p><img class="img-fluid" src="assets/img/manual/HowToUse9.gif">
+                    <p><strong>Hombros</strong></p><img class="img-fluid" src="assets/img/manual/HowToUse10.gif">
+                    <p><strong>Pecho</strong></p><img class="img-fluid" src="assets/img/manual/HowToUse11.gif">
+                    <p><strong>Espalda</strong></p><img class="img-fluid" src="assets/img/manual/HowToUse12.gif">
+                    <p><strong>Centro de gravedad</strong></p><img class="img-fluid" src="assets/img/manual/HowToUse13.gif">
+                    <p><strong>Pelvis</strong></p><img src="assets/img/manual/HowToUse14.gif" style="width: 100%;">
+                    <p>Listo, eso es todo lo que hay que saber respecto al movimiento de los controladores, sin embargo, la cabeza tiene atributos añadidos para modificar el estado de ánimo de los ojos. Se los explicaré con el siguiente GIF.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 d-lg-flex justify-content-lg-center align-items-lg-center"><img src="assets/img/manual/HowToUse15.gif" style="width: 100%;"></div>
+                <div class="col-lg-6">
+                    <p>Para aprovechar los atributos de los ojos, simplemente necesitas seleccionar el controlador de la cabeza y modificar el valor de enojado, feliz, triste o parpadeo a 1.<br></p>
+                    <p>Como se puede ver en la imagen de a la izquierda, los ojos cambiarán acorde al estado de ánimo puesto en 1.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <h2 class="section-heading">C'est fini</h2>
+                    <p>Eso es todo lo que se tiene que saber para utilizar este rig intermedio. Finalizo este manual con un pequeño gif de la animación con los IKs que hice una vez lo terminé. Hope it helped!</p><a href="#"><img class="img-fluid" src="assets/img/manual/ManualFinished.gif"></a></div>
+            </div>
+        </div>
+    </article>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item"><a class="twittericon" href="https://www.twitter.com/joseatrejos" target="_blank" style="margin-right: 15px;"><i class="fab fa-twitter" style="font-size: 35px;"></i></a></li>
+                        <li class="list-inline-item"><a class="facebookicon" href="https://www.facebook.com/joseatrejos" target="_blank" style="margin-right: 15px;"><i class="fab fa-facebook-f" style="font-size: 35px;"></i></a></li>
+                        <li class="list-inline-item"><a class="githubicon" href="https://www.github.com/joseatrejos" target="_blank"><i class="fab fa-github" style="font-size: 35px;"></i></a></li>
+                    </ul>
+                    <p class="text-muted copyright">Copyright&nbsp;©&nbsp;Ludens Productions 2020</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/-Fixed-Navbar-start-with-transparency-background-BS4-.js"></script>
+    <script src="assets/js/clean-blog.js"></script>
+</body>
+
+</html>

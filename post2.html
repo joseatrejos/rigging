@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Blog Post - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amita">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/css/-Fixed-Navbar-start-with-transparency-background-BS4-.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+    <div>
+        <header>
+            <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white transparency border-bottom border-light" id="transmenu">
+                <div class="container"><a class="navbar-brand text-primary" href="index.html"><i class="fas fa-cubes fa-2x"></i>&nbsp; 3D Rigging</a><button data-toggle="collapse" class="navbar-toggler collapsed" data-target="#navcol-1"><span></span><span></span><span></span></button>
+                    <div
+                        class="collapse navbar-collapse" id="navcol-1">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Posts</a></li>
+                            <li class="nav-item"><a class="nav-link" href="about.html">Acerca de mí</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contact.html">Contacto</a></li>
+                        </ul>
+                </div>
+    </div>
+    </nav>
+    </header>
+    </div>
+    <header class="masthead" style="background: url(&quot;assets/img/post2/post2Intro.png&quot;) center / cover no-repeat;">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <div class="post-heading">
+                        <h1>Rigging 3D Parte 2</h1>
+                        <h2 class="subheading">Volviendo más complejo el rig&nbsp;</h2><span class="meta">Publicado por&nbsp;<a href="https://www.github.com/joseatrejos" target="_blank">José Trejo</a>&nbsp;el 16 de octubre<em>&nbsp;del</em>&nbsp;2020</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <p>Ahora veremos los siguientes temas:<br></p>
+                    <ul>
+                        <li>Cómo poner los Huesos bn y be de un esqueleto humanoide.<br></li>
+                        <li>Cómo hacer controllers personalizados.<br></li>
+                        <li>Constraints de los controllers de un personaje humanoide.<br></li>
+                        <li>Expresiones de los ojos<br></li>
+                        <li>Foot roll (DRVs, constraints y node editor)<br></li>
+                        <li>Stretch en las extremidades (Node editor)<br></li>
+                        <li>IK_FK de brazos y piernas (Node editor)<br></li>
+                    </ul>
+                    <h2 class="section-heading">Bones</h2>
+                    <p>Comencemos viendo la estructura&nbsp;ya terminada de los huesos.<br></p><img src="assets/img/post2/post2Skelleton1.png" style="width: 100%;"><span class="caption text-muted">Holy **** aren't those too many bones? Yes, they are too many.</span>
+                    <p>La mejor manera de hacer esto es insertar los huesos del centro y los del lado derecho para después espejear ese lado y completar el rig.</p>
+                    <p>Dejaré aquí las fotos del cuerpo con los nombres de cada hueso y les pondré números para que sepan en qué orden se deben de insertar. Empecemos por la parte central del cuerpo.</p><img src="assets/img/post2/post2Skelleton2.png" style="width: 100%;">
+                    <p>Ahora haremos el brazo izquierdo hasta los dedos.&nbsp;</p><img src="assets/img/post2/post2Skelleton3.png" style="width: 100%;">
+                    <p>En caso de que se lo pregunten, no, no es un error que hayan dos huesos en el mismo lugar.&nbsp;Nos vamos a la pestaña de Rigging y le damos a Skeleton -&gt; Insert Joints. Damos click en <strong>bn_chest01 </strong>y arrastramos hasta
+                        llegar a la clavícula; en cuanto suelten el mouse se creará otro hueso. Es muy importante que una vez tengan el <strong>bn_left_clavicle01 </strong>le den click sin mover el mouse para crear otro hueso en exactamente la misma posición.
+                        Nómbrenlo <strong>be_left_clavicle01 </strong>y continúen extendiendo huesos hasta la muñeca como se muestra en la imagen.<br></p><img src="assets/img/post2/Post2Tutorial1.gif" style="width: 100%;">
+                    <p>Una vez esté lista esta parte del brazo, deberemos de proseguir con la estructura de la muñeca. Ahora requeriremos insertar huesos en varias direcciones, siempre partiendo del <strong>bn_left_wrist_01.</strong><br></p><img src="assets/img/post2/post2Skelleton4.png"
+                        style="width: 100%;">
+                    <p>¡Muy bien! Ya tenemos los huesos de un brazo, ahora vamos a trabajar las piernas. Será necesario insertar el hueso de la pelvis, pero para crearlo <em><span style="text-decoration: underline;">no deberemos de mover el mouse</span></em>,
+                        solo hay que dar click en el hueso <strong>bn_root01</strong>&nbsp;para que el nuevo hueso al que llamaremos <strong>bn_pelvis01 </strong>se encuentre&nbsp;en la misma posición que su padre. Después insertamos un hueso más abajo,
+                        saliendo de la geometría.<br></p><img src="assets/img/post2/post2Skelleton5.png" style="width: 100%;">
+                    <p>Como podrán ver en la imagen, para poder diferenciar al root de la pelvis hay que ajustar el tamaño de los huesos. Esto va a ser importante por que necesitaremos insertar los huesos de la pierna en el <strong>bn_pelvis01</strong>.
+                        Los bones a añadir son los siguientes:<br></p><img src="assets/img/post2/post2Skelleton6.png" style="width: 100%;">
+                    <p>Bien, ya saben como hacer los bones y bone ends, así que no explicaré tan a profundidad como antes. Simplemente usen la herramienta para insertar huesos y una vez lleguen al <strong>be_left_foot_01 </strong>den click sin mover el mouse
+                        para generar el bone que sigue y continúan.</p>
+                    <p>Asegurense de seleccionar los bone ends (huesos cuyo nombre&nbsp;comience con "be") y pongan&nbsp;en 0 todos los valores joint orient del attribute editor.&nbsp;<br><br>Por último,&nbsp;tendremos que espejear los huesos para conseguir
+                        el lado izquierdo con el menor esfuerzo posible. Seleccionamos el hueso padre de lo que vamos a espejear (<strong>bn_left_clavicle01 </strong>y <strong>bn_left_leg01</strong>) y le pedimos a las opciones de mirror joints que reemplacen
+                        left por right.<br></p><img src="assets/img/post2/Post2Tutorial3.gif" style="width: 100%;">
+                    <h2 class="section-heading">Controladores</h2>
+                    <p>En esta ocasión aprenderemos a crear controladores personalizados. Primero hay que crear un cubo <strong>y dejarlo en el origen</strong> (en el gif no está en el origen pero debe de estarlo), luego hay que usar la CV Curve Tool junto
+                        con Snap to Points para delinear los extremos de dicho cubo. No importa si se repiten los puntos en los que dan click. Ya que terminen de dibujar, pulsen enter y borren la geometría.</p><img src="assets/img/post2/Post2Tutorial2.gif" style="width: 100%;">
+                    <p>A esta curva con forma de cubo podemos modificarle los control vertex para darle la figura que deseemos. Yo recomiendo darle una figura rectangular para poder usar este controlador como un "zapato" que controle al pie. una vez que
+                        el controlador adquiera la figura que deseamos, necesitamos crearle un grupo y trasladar el grupo para que esté más o menos en la posición que vemos en la foto de abajo.</p><img src="assets/img/post2/post2Skelleton7.png" style="width: 100%;">
+                    <blockquote
+                        class="blockquote">
+                        <p class="mb-0">Ejemplo de la figura que se le puede dar al controlador de los pies, en forma de rectangulo</p>
+                        </blockquote>
+                        <p>Sabiendo cómo modificar controladores, haremos varios de ellos con figuras convenientes para mover partes del cuerpo del Fall Guy. Las figuras que yo utilicé fueron las siguientes:</p><img src="assets/img/manual/HowToUse1.gif" style="width: 100%;">
+                        <ul
+                            style="margin-top: 25px;">
+                            <li>Una C para el centro de gravedad (bn_root01).</li>
+                            <li>Una caja para la pelvis.</li>
+                            <li>Un círculo para la espalda.</li>
+                            <li>Otra caja para el pecho.</li>
+                            <li>Un cubo para la cabeza.</li>
+                            <li>Un trapezoide para cada hombro.</li>
+                            <li>Un círculo para las muñecas.</li>
+                            <li>Cículos deformados para cada hueso de los dedos.</li>
+                            </ul>
+                            <p>Simplemente hará falta renombrar los controladores a anim_pelvis, anim_back, etc... y emparentarlos en el mismo orden que los huesos.</p>
+                            <h2 class="section-heading">Constraints de los controladores</h2>
+                            <p>Como bien habrán visto, hicimos controladores para un IKs, por lo que deberemos de hacer algunos constraints. Comencemos por los del centro del cuerpo, simplemente deben de poner orient constraints a sus respectivos huesos
+                                y listo.</p>
+                            <div class="d-lg-flex justify-content-lg-center align-items-lg-center"><img class="img-fluid" src="assets/img/post2/post2Skelleton8.png"></div><span class="caption text-muted">Solo deben de usarse orient constraints en el root, pelvis, espalda, pecho, cabeza y hombros</span>
+                            <p>Lo siguiente serán los brazos, aplicamos un IK del bn_shoulder al bn_wrist y luego hacemos un controlador cuadrado y le aplicamos un constraint de pole vector al codo para que lo siga.</p>
+                            <div class="d-lg-flex justify-content-lg-center align-items-lg-center"><img class="img-fluid" src="assets/img/post2/Post2Tutorial4.gif"></div>
+                            <p>Ya que se hace eso en ambos brazos, necesitamos hacerlo en las piernas. Se aplica el IK desde el leg hasta el ankle y se aplica el constraint de pole vector con un controlador nuevo y la rodilla.</p>
+                            <h2 class="section-heading">Expresiones de los Ojos</h2>
+                            <p>Agregamos 4 atributos flotantes al controlador de la cabeza: <em>feliz, triste, enojado</em> y <em>parpadeo</em>. Después de eso, duplicamos los ojos 4 veces y modificamos tanto su nombre como su geometría para que parezca
+                                enojado, triste, feliz y parpadeando.</p>
+                            <div class="d-lg-flex justify-content-lg-center align-items-lg-center"><img class="img-fluid" src="assets/img/post2/post2Eyes.png"></div><span class="caption text-muted">Geometrías de las 4 expresiones del personaje. En orden de las manecillas del reloj: Triste, parpadeando, enojado y feliz</span>
+                            <p>Ahora seleccionas todos los ojos modificados y luego los ojos originales, te vas a la pestaña Deform -&gt; Blendshape, le ponemos un nombre como "Expresiones" y en la pestañita de <em>Advanced</em>&nbsp;ponemos pre-deformation.</p>
+                            <div
+                                class="d-lg-flex justify-content-lg-center align-items-lg-center"><img class="img-fluid" src="assets/img/post2/post2Eyes2.png"></div>
+            </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+            <div class="col-lg-6 d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 25px;">
+                <p>Una vez hecho esto, seleccionamos el controlador de la cabeza y abrimos el Connection Editor. Nos aseguramos de que las opciones de este controlador estén del lado <em>from</em>.<br><br>Ahora seleccionamos los ojos originales y, en Channel
+                    Box/Layer Editor damos click en el INPUT <em>Expresiones</em>&nbsp;que creamos para después presionar "Reload Right" en el connection editor.<br><br>En el lado izquierdo vete hasta abajo y selecciona la expresión, por ejemplo "Feliz".
+                    Ahora busca la opción weight en el lado derecho y expándela; dale click a feliz y el atributo quedará conectado a la geometría correspondiente.&nbsp;<br><br>Por ultimo, mete los ojos modificados en un grupo y ocúltalo.<br></p>
+            </div>
+            <div class="col-lg-6 d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 25px;"><img src="assets/img/post2/post2Eyes3.png" style="width: 100%;"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <h2 class="section-heading">Foot Roll</h2>
+                <p>Este sistema tiene que hacerse dos veces, por lo que tendrán que repetir este proceso para el otro pie ya que no hay forma sencilla de espejearlo. Veamos el pie derecho como ejemplo: se duplica el hueso <strong>bn_right_ankle01,</strong>&nbsp;el
+                    cual<strong>&nbsp;</strong>se duplicará junto con sus hijos, no los borren. Preferiblemente&nbsp;ajusten el tamaño de los radios de estos huesos para diferenciarlos de los originales.<br><br>Ahora renombren estos huesos duplicados
+                    para que sigan la nomenclatura <strong>Drv_right_ankle.</strong>&nbsp;Utilicen la herramienta Insert Joints para extender un hueso extra desde el <strong>Drv_left_fingers </strong>hasta el otro extremo del pie, como se ve en la foto
+                    de abajo.</p><img src="assets/img/post2/Post2Tutorial10.gif" style="width: 100%;">
+                <p>A este hueso le llamaremos&nbsp;<strong>Drv_left_heel. </strong>Deberemos de seleccionar el hueso padre<strong>&nbsp;Drv_left_ankle </strong>y desemparentarlo con <strong><em>shift + P; </em></strong>luego simplemente habrá que usar
+                    <span
+                        style="text-decoration: underline;">reroot skeleton</span><strong><em> </em></strong>mientras que seguimos seleccionando este hueso y el parenting se invertirá.</p>
+                <p>Tendremos que agregar un atributo llamado "Foot Roll" al controlador del pie. Selecciona la cajita y agrega este atributo como flotante con un rango de -1 a 1.</p>
+                <p>Ahora utilizaremos el set driven key, así que carga este controlador como driver. El parámetro a modificar de este controlador será nuestro atributo "Foot Roll" por supuesto. Como driven, tendrás que cargar los siguientes huesos:</p>
+                <ul>
+                    <li>Drv_left_heel</li>
+                    <li>Drv_left_fingers</li>
+                    <li>Drv_left_foot</li>
+                </ul>
+                <p>Los valores a modificar en los drivens siempre será el de rotación en Z. Así como está todo ahorita mismo, selecciona todos los drivens y la rotación Z para darle set driven key y así marcar la pauta del atributo "Foot Roll" en 0.<br></p>
+                <p>Ahora solo quedan por hacer las Keys del valor&nbsp;<strong>-1</strong>,&nbsp;<strong>0.5 </strong>y&nbsp;<strong>1</strong>&nbsp;del "Foot Roll".<br><br><em><span style="text-decoration: underline;">Para el -1</span></em>: Ponle -1 al
+                    valor del atributo "Foot Roll" y selecciona solamente <strong>Drv_left_heel</strong>;<strong>&nbsp;</strong>rótalo en Z para que la punta del pie suba exageradamente como se muestra en la foto.<br></p><img src="assets/img/post2/post2FootRoll.png"
+                    style="width: 100%;">
+                <p><em><span style="text-decoration: underline;">Para el 1</span></em>: Ponle 1 al valor del atributo "Foot Roll" y selecciona&nbsp;<strong>Drv_left_fingers </strong>y&nbsp;<strong>Drv_left_foot</strong>;<strong>&nbsp;</strong>rótalo en Z
+                    para que el personaje se ponga de puntitas de manera exagerada.<br></p><img src="assets/img/post2/post2FootRoll2.png" style="width: 100%;">
+                <p><em><span style="text-decoration: underline;">Para el 0.5</span></em>: Ponle 0.5 al valor del atributo "Foot Roll" y selecciona solamente <strong>Drv_left_foot</strong>;<strong>&nbsp;</strong>rótalo en Z para que el personaje se ponga
+                    de puntitas.<br></p><img src="assets/img/post2/post2FootRoll3.png" style="width: 100%;">
+                <p>Ahora viene algo ligeramente complicado de explicar visualmente así que presten atención. Ya tenemos el comportamiento de los huesos configurado con el Set Driven Key, pero hace falta vincular este sistema con los huesos del pie. Haremos
+                    que los huesos se comporten como este sistema dependiendo del valor del atributo "Foot Roll".<br><br>Para ello, tendremos que poner constraints como se ve en el GIF de abajo. Asegúrense de seleccionar el triángulo del Drv y luego el
+                    triángulo del bn.</p><img src="assets/img/post2/Post2Tutorial11.gif" style="width: 100%;">
+                <p>Noten que es:<br></p>
+                <ul>
+                    <li><strong>Drv_right_fingers&nbsp;</strong>con bn_right_foot01</li>
+                    <li><strong>Drv_right_foot&nbsp;</strong>con&nbsp;bn_right_ankle</li>
+                </ul>
+                <p>Teniendo hecho todo lo anterior, su foot roll debería de funcionar tal y como Dios manda, solo hace falta repetirlo en el otro pie.<br></p>
+                <h2 class="section-heading">Stretch en las extremidades</h2>
+                <p>Para obtener un efecto de caricatura, haremos posible que el personaje estire las piernas y los brazos más allá de lo que debería de ser posible.</p>
+                <div class="d-lg-flex justify-content-lg-center align-items-lg-center"><img class="img-fluid" src="assets/img/post2/Post2Tutorial5.gif"></div><span class="caption text-muted">Stretchy legs</span>
+                <p>Seleccionamos el controlador de la muñeca derecha y le agregamos un atributo llamado "Stretch Arm" que será un <em>enum </em>con las opciones de <em>On </em>y <em>Off</em>.</p>
+                <p>Vamonos a Create -&gt; Measure Tools -&gt; Distance tool y ponemos dos puntos en cualquier parte desde la vista frontal. Nombramos al primer punto como <strong>inicial_r_arm </strong>y al segundo como <strong>final_r_arm</strong>. Ahora,
+                    con el snap to points acomoda el punto inicial en el hueso del hombro y al punto final en el hueso de la muñeca.</p>
+                <p>Ahora abriremos el node editor y añadiremos el controlador de la muñeca&nbsp;<strong>anim_right_wrist</strong>, así como los huesos&nbsp;<strong>bn_right_shoulder01&nbsp;</strong>y&nbsp;<strong>bn_right_elbow01.&nbsp;</strong>Una vez hecho
+                    esto, agregaremos un multiplydivide y dos conditions. Une los nodos de la siguiente forma:<br></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-lg-flex justify-content-lg-center align-items-lg-center"><img class="img-fluid" src="assets/img/post2/post2Stretchy1.png"></div>
+            </div>
+            <div class="col-lg-6 d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 30px;">
+                <p>Con las conexiones hechas solo hace falta seleccionar el multiplyDivide y dirigirse al attribute editor. Deberemos poner divide en el campo operation y hacer que el input 2 tenga el mismo número que input 1.</p>
+            </div>
+            <div class="col-lg-6 d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 30px;"><img src="assets/img/post2/post2Stretchy2.png" style="width: 100%;"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 30px;"><img src="assets/img/post2/post2Stretchy3.png" style="width: 100%;"></div>
+            <div class="col-lg-6 d-lg-flex justify-content-lg-center align-items-lg-center" style="margin-top: 30px;">
+                <p>Hacemos exactamente lo mismo seleccionando la primera condición del stretchy arm y en el attribute editor ponemos el second term igual al first term. Definimos la operación como Greater or Equal y listo.<br></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <p>El brazo derecho por fin se puede estirar, ahora solo hay que repetir el proceso para cada pierna y el otro brazo.</p><img src="assets/img/post2/Post2Tutorial6.gif" style="width: 100%;">
+                <h2 class="section-heading">IK FK de brazos y piernas</h2>
+                <p>Ya tenemos el IK hecho, pero ahora deberemos de hacer los FKs y los huesos neutrales. Se duplican los huesos del hombro en adelante y del leg en adelante <strong>2 veces; </strong>uno de los duplicados serán los huesos neutros y los otros
+                    serán los huesos del FK. Renombramos con <em>Search and Replace Names </em>para que los 01 se vuelvan FK y IK, pero el nombre se mantenga correctamente en el esqueleto neutral.<br><br>Luego se hacen los controladores de los FKs y se
+                    ponen los orient constraints en los huesos correspondientes.</p><img src="assets/img/post2/post2IKFK1.png" style="width: 100%;"><span class="caption text-muted">Los controladores rojos son los FKs</span>
+                <p>Para alternar entre IK y FK necesitaremos hacer switches para cada extremidad y agregarles un atributo flotante de nombre "IK FK Switch" con un rango del 0 al 1.<br></p><img src="assets/img/post2/post2IKFK2.png" style="width: 100%;"><span class="caption text-muted"><em>Las lunas verdes son los switches con el atribujo "IK</em>&nbsp;FK Switch"<br></span>
+                <p>Ahora que tenemos los IK/FK, empezaremos a conectar el sistema del brazo (que es el más difícil). Dejemos esto claro, la lógica es la misma para cada parte del cuerpo, solo hay que entenderlo y replicarlo. Para este ejemplo usaré el brazo
+                    derecho.</p>
+                <p>Seleccionaremos el switch_right_arm y<strong>&nbsp;todos los huesos del hombro en adelante,&nbsp;en sus versiones IK, FK y neutrales</strong>. Abrimos el node editor y agrupamos los huesos IK, FK y neutros para que estén entendibles...
+                    una vez estén acomodados <strong><span style="text-decoration: underline;">selecciona todos los nodos y oprime la letra P para fijarlos</span></strong>.</p>
+            </div>
+            <div class="col-lg-12">
+                <div class="d-lg-flex justify-content-lg-center align-items-lg-center"><img class="img-fluid" src="assets/img/post2/post2IKFK3.png"></div>
+                <p>En mi caso yo siempre acomodo el switch hasta la izquierda, seguido por todos los huesos del hombro (De arriba para abajo, el IK, el FK y por último el neutral), luego los huesos del codo, los de la muñeca y así sucesivamente</p>
+                <p>Debemos de comprender algo antes de empezar, y eso es que en este caso cada 3 huesos (IK, FK y neutral) se contarán solo como uno. ¿Por qué? Por que en este sistema vamos a definir qué comportamiento tendrá el esqueleto neutral, si el
+                    del IK o el del FK (dependiendo del valor del switch), por cual en realidad debemos de considerar que aunque nosotros veamos&nbsp;<strong>tres tipos de huesos, estos equivalen a un solo "joint".</strong>&nbsp;A partir de ahora (y únicamente
+                    en este tema) me referiré como <strong>joint</strong>&nbsp;a los tres huesos de una articulación.</p>
+                <div class="d-lg-flex justify-content-lg-center align-items-lg-center"><img class="img-fluid" src="assets/img/post2/post2IKFK4.png"></div>
+            </div>
+            <div class="col-md-10 col-lg-8 mx-auto">
+                <p>Muy bien, terminemos esto. En resumidas cuentas, cada <strong>joint&nbsp;</strong>requerirá de un blend color, por lo que requeriremos 9 para todo el brazo. La lógica de esto es que debemos de conectar el atributo "IK FK Switch" del switch
+                    con el blend color correspondiente a ese joint (se une con el&nbsp;<em>Blender).</em> Posterior a ello debemos de conectar el <strong>rotate del&nbsp;IK </strong>al C<em>olor 1</em> y el <strong>rotate del&nbsp;FK </strong>al <em>Color 2</em>&nbsp;(realmente
+                    no importa el orden, pero es necesario que haya uniformidad, o sea que todos los IKs de los joints vayan al mismo número y todos los FKs vayan al otro). Por último, se conecta el <em>Output</em>&nbsp;del blendcolor con el rotate del
+                    hueso neutral.<br></p>
+                <p>Eso es todo; estas conexiones permiten que el blendColor defina el comportamiento del hueso neutral a partir del valor del parámetro "IK FK Switch". Corto, pero cuando tienes 9 <strong>joints</strong>, eso equivale 27 nodos por brazo,
+                    por lo que tardará un rato. Simplemente hará falta repetir lo mismo para el brazo derecho y replicar este proceso para con la leg, knee, ankle y foot de la pierna.</p>
+                <h3 class="section-heading" style="font-size: 27px;">Set Driven Key</h3>
+                <p>Para estilizar más este rig, será necesario agregar un set driven key donde el valor del switch vuelva visibles al IK e invisible al FK dependiendo de su número y viceversa.</p><img class="img-fluid" src="assets/img/post2/Post2Tutorial7.gif"><span class="caption text-muted">Switch con el set driven key que cambia la visibilidad del IK/FK</span>
+                <p>Simplemente carga como driver el switch y como driven los siguientes elementos:</p>
+                <ul>
+                    <li>anim_left_legFK</li>
+                    <li>anim_left_kneeFK<br></li>
+                    <li>anim_left_ankeFK<br></li>
+                    <li>anim_left_footFK<br></li>
+                </ul>
+                <p>Con el switch en el número correspondiente al FK (o sea el número con el que los huesos neutrales se mueven con los controladores FK), pon la visibilidad de los controllers en visible y dale "Set Key". Ahora cambia el valor del switch
+                    y apaga la visibilidad de los controladores y dale "Set Key".<br><br>Falta hacerlo al revés, selecciona los siguientes elementos como driven:</p>
+                <ul>
+                    <li>anim_left_footIK</li>
+                    <li>anim_left_kneeIK</li>
+                </ul>
+                <p>Repite el proceso del Set Driven Key para volver estos controladores visibles en su estado del switch e invisibles en el otro. Ya nomás hay que hacer esto mismo para cada extremidad y el sistema estará listo.</p>
+                <h3 class="section-heading"
+                    style="font-size: 27px;">Skinning</h3>
+                <p>Debido a que ya conocen este proceso no profundizaré mucho pero a final de cuentas son 3 simples pasos.</p>
+                <p>Primero, utiliza la herramienta de selección por nombre para encontrar todos los huesos "bn" neutrales; escribe bn*01 y deberían de seleccionarse dichos huesos. Ahora selecciona toda la geometría y haz el skin con heatmap de ser posible.</p>
+                <img
+                    class="img-fluid" src="assets/img/post2/Post2Tutorial8.gif"><span class="caption text-muted">Heatmap Skinning</span>
+                    <ul></ul>
+                    <p>Finalmente, se tiene que pintar la influencia de los huesos para que la geometría se mueve de manera orgánica. Para ello se utiliza el paint skin weights y requiere de mucho cuidado a la hora de pintar para no borrar accidentalmente
+                        la influencia de otro hueso próximo.</p><img class="img-fluid" src="assets/img/post2/Post2Tutorial9.gif">
+                    <p>Al finalizar este largo proceso de pintado, ¡por fin habrás terminado tu rig intermedio!<br></p>
+            </div>
+        </div>
+        </div>
+    </article>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-8 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item"><a class="twittericon" href="https://www.twitter.com/joseatrejos" target="_blank" style="margin-right: 15px;"><i class="fab fa-twitter" style="font-size: 35px;"></i></a></li>
+                        <li class="list-inline-item"><a class="facebookicon" href="https://www.facebook.com/joseatrejos" target="_blank" style="margin-right: 15px;"><i class="fab fa-facebook-f" style="font-size: 35px;"></i></a></li>
+                        <li class="list-inline-item"><a class="githubicon" href="https://www.github.com/joseatrejos" target="_blank"><i class="fab fa-github" style="font-size: 35px;"></i></a></li>
+                    </ul>
+                    <p class="text-muted copyright">Copyright&nbsp;©&nbsp;Ludens Productions 2020</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/-Fixed-Navbar-start-with-transparency-background-BS4-.js"></script>
+    <script src="assets/js/clean-blog.js"></script>
+</body>
+
+</html>
